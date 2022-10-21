@@ -17,8 +17,35 @@ function registro(e){
     let passVal = pass.value;
 
     if(nombreVal == '' || emailVal == '' || userVal == '' || passVal == ''){
+        creatMensaje('verifica tus campos');
         return;
+        
     }
+    
+    const usuario = {
+        nombre: nombreVal,
+        email: emailVal,
+        user: userVal,
+        pass: passVal
+    }
+    localStorage.setItem('usuario', JSON.stringify(usuario));
 
-    console.log('validando datos');
+    nombre.value = '';
+    email.value = '';
+    user.value = '';
+    pass.value = '';
+
+    creatMensaje('Usuario registrado', 'success');
+}
+
+function creatMensaje(texto, tipo) {
+    const nuevoElemento = document.createElement('div');
+    nuevoElemento.innerText = texto;
+    nuevoElemento.classList.add('alert','alert-' + tipo);
+    const divMensaje = document.getElementById('mensaje');
+    divMensaje.appendChild(nuevoElemento);
+    setTimeout(function(){
+        nuevoElemento.remove();
+    }, 2000);
+
 }
